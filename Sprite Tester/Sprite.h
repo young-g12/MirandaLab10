@@ -1,6 +1,8 @@
+#include <allegro5/allegro.h>
 class sprite
 {
 public: 
+	sprite();
 	~sprite();
 	void updatesprite();
 	void bouncesprite(int SCREEN_W, int SCREEN_H);

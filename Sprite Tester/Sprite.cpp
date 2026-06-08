@@ -6,6 +6,23 @@
 #include <iostream>
 using namespace std;
 
+sprite::sprite()
+{
+	x = rand() % 600;
+	y = rand() % 440;
+
+	xspeed = rand() % 5 + 1;
+	yspeed = rand() % 5 + 1;
+
+	xdelay = 0;
+	ydelay = 0;
+
+	xcount = 0;
+	ycount = 0;
+
+	animdir = 1;
+}
+
 void sprite::drawSprite()
 {
 	al_draw_bitmap(image[curframe],x,y,0);
