@@ -64,7 +64,8 @@ int main(void)
 				{
 					if (aliens[i].collides(aliens[j]))
 					{
-						cout << "Collision!" << endl;
+						aliens[i].handleCollision(width, height);
+						aliens[j].handleCollision(width, height);
 					}
 				}
 			}

@@ -21,11 +21,20 @@ sprite::sprite()
 	ycount = 0;
 
 	animdir = 1;
+	red = 255;
+	green = 255;
+	blue = 255;
 }
 
 void sprite::drawSprite()
 {
-	al_draw_bitmap(image[curframe],x,y,0);
+	al_draw_tinted_bitmap(
+		image[curframe],
+		al_map_rgb(red, green, blue),
+		x,
+		y,
+		0
+	);
 }
 
 void sprite::updatesprite()
@@ -123,5 +132,17 @@ bool sprite::collides(sprite& other)
 		);
 }
 
+void sprite::handleCollision(int screenW, int screenH)
+{
+	if (type == SCARED)
+	{
+		red = rand() % 256;
+		green = rand() % 256;
+		blue = rand() % 256;
+
+		x = rand() % (screenW - width);
+		y = rand() % (screenH - height);
+	}
+}
 
 

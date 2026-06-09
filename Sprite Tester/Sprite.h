@@ -17,7 +17,12 @@ public:
 	void bouncesprite(int SCREEN_W, int SCREEN_H);
 	void load_animated_sprite(int size);
 	void drawSprite();
+	float red;
+	float green;
+	float blue;
 	bool collides(sprite& other);
+	void handleCollision(int screenW, int screenH);
+
 
 	int getX(){return x;}
 	int getY(){return y;}
