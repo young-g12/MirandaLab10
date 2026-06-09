@@ -113,5 +113,15 @@ sprite::~sprite()
 		al_destroy_bitmap(image[i]);
 }
 
+bool sprite::collides(sprite& other)
+{
+	return (
+		x < other.x + other.width &&
+		x + width > other.x &&
+		y < other.y + other.height &&
+		y + height > other.y
+		);
+}
+
 
 

@@ -57,6 +57,18 @@ int main(void)
 			{
 				aliens[i].bouncesprite(width, height);
 			}
+
+			for (int i = 0; i < NUM_SPRITES; i++)
+			{
+				for (int j = i + 1; j < NUM_SPRITES; j++)
+				{
+					if (aliens[i].collides(aliens[j]))
+					{
+						cout << "Collision!" << endl;
+					}
+				}
+			}
+
 			redraw = true;
 		}
 		else if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
