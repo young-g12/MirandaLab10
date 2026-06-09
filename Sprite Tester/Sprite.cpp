@@ -90,6 +90,7 @@ void sprite::bouncesprite(int SCREEN_W, int SCREEN_H)
 void sprite::load_animated_sprite(int size)
 {
 	//load the animated sprite
+	type = static_cast<SpriteType>(rand() % 4);
 	char s[80];
 	maxframe=size;
 	for (int n=0; n<size; n++)

@@ -1,4 +1,13 @@
 #include <allegro5/allegro.h>
+
+enum SpriteType
+{
+	SPIN,
+	SCARED,
+	BABY,
+	FREEZE
+};
+
 class sprite
 {
 public: 
@@ -10,6 +19,7 @@ public:
 	void drawSprite();
 	int getX(){return x;}
 	int getY(){return y;}
+	SpriteType type;
 
 
 private:
