@@ -44,7 +44,7 @@ int main(void)
 	al_start_timer(timer);
 
 	for (int i = 0;i < NUM_SPRITES;i++)
-		aliens[i].load_animated_sprite(9);
+		aliens[i].load_animated_sprite(5);
 
 	while(!done)
 	{

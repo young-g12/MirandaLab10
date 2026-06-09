@@ -95,10 +95,8 @@ void sprite::load_animated_sprite(int size)
 	maxframe=size;
 	for (int n=0; n<size; n++)
 	{
-		sprintf_s(s,"Alien%d.bmp",n);
+		sprintf_s(s, "Fairy%d_128.png", n);
 		image[n] = al_load_bitmap(s);
-
-		al_convert_mask_to_alpha(image[n], al_map_rgb(255, 255, 255));
 	}  
 	width=al_get_bitmap_width(image[0]);
 	height=al_get_bitmap_height(image[0]);
