@@ -24,21 +24,87 @@ sprite::sprite()
 	red = 255;
 	green = 255;
 	blue = 255;
+	frozen = false;
+	freezeStartTime = 0;
+	angle = 0;
+
+	scale = 1.0f;
+	babyStartTime = 0;
+	babyShrinking = false;
+	alive = true;
 }
 
 void sprite::drawSprite()
 {
-	al_draw_tinted_bitmap(
-		image[curframe],
-		al_map_rgb(red, green, blue),
-		x,
-		y,
-		0
-	);
+	if (!alive)
+		return;
+
+	if (type == SPIN)
+	{
+		al_draw_tinted_rotated_bitmap(
+			image[curframe],
+			al_map_rgb(red, green, blue),
+			width / 2,
+			height / 2,
+			x + width / 2,
+			y + height / 2,
+			angle,
+			0
+		);
+	}
+	else if (type == BABY)
+	{
+		al_draw_tinted_scaled_bitmap(
+			image[curframe],
+			al_map_rgb(red, green, blue),
+			0,
+			0,
+			width,
+			height,
+			x,
+			y,
+			width * scale,
+			height * scale,
+			0
+		);
+	}
+	else
+	{
+		al_draw_tinted_bitmap(
+			image[curframe],
+			al_map_rgb(red, green, blue),
+			x,
+			y,
+			0
+		);
+	}
 }
 
 void sprite::updatesprite()
 {
+	if (!alive)
+		return;
+
+	if (frozen)
+	{
+		if (al_get_time() - freezeStartTime > 5)
+		{
+			frozen = false;
+		}
+		else
+		{
+			return;
+		}
+	}
+
+	if (type == BABY && babyShrinking)
+	{
+		if (al_get_time() - babyStartTime > 10)
+		{
+			babyShrinking = false;
+		}
+	}
+
 	//update x position
 	if (++xcount > xdelay)
 	{
@@ -60,6 +126,11 @@ void sprite::updatesprite()
 		curframe++;
 		if (curframe >= maxframe)
 			curframe = 0;
+	}
+
+	if (type == SPIN)
+	{
+		angle += 0.05;
 	}
 }
 
@@ -142,6 +213,29 @@ void sprite::handleCollision(int screenW, int screenH)
 
 		x = rand() % (screenW - width);
 		y = rand() % (screenH - height);
+	}
+
+	if (type == FREEZE)
+	{
+		frozen = true;
+		freezeStartTime = al_get_time();
+	}
+
+	if (type == BABY)
+	{
+		scale /= 2.0f;
+
+		x = rand() % (screenW - width);
+		y = rand() % (screenH - height);
+
+		babyShrinking = true;
+		babyStartTime = al_get_time();
+
+		if (scale < 0.05f)
+		{
+			cout << "Baby sprite died" << endl;
+			alive = false;
+		}
 	}
 }
 

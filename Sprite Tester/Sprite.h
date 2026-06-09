@@ -17,9 +17,6 @@ public:
 	void bouncesprite(int SCREEN_W, int SCREEN_H);
 	void load_animated_sprite(int size);
 	void drawSprite();
-	float red;
-	float green;
-	float blue;
 	bool collides(sprite& other);
 	void handleCollision(int screenW, int screenH);
 
@@ -28,6 +25,16 @@ public:
 	int getY(){return y;}
 
 private:
+	SpriteType type;
+	float red;
+	float green;
+	float blue;
+	bool frozen;
+	double freezeStartTime;
+	float angle;
+	float scale;
+	double babyStartTime;
+	bool babyShrinking;
 	int x,y;
 	int width,height;
 	int xspeed,yspeed;
@@ -36,5 +43,5 @@ private:
 	int curframe,maxframe,animdir;
 	int framecount,framedelay;
 	ALLEGRO_BITMAP *image[9];
-	SpriteType type;
+	bool alive;
 };
