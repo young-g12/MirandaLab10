@@ -19,8 +19,6 @@ public:
 	void drawSprite();
 	int getX(){return x;}
 	int getY(){return y;}
-	SpriteType type;
-
 
 private:
 	int x,y;
@@ -31,4 +29,5 @@ private:
 	int curframe,maxframe,animdir;
 	int framecount,framedelay;
 	ALLEGRO_BITMAP *image[9];
+	SpriteType type;
 };
